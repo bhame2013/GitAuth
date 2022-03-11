@@ -2,6 +2,7 @@
 import { Login } from "components/sections";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 //utils
 import { setCookie } from "src/utils/cookies";
