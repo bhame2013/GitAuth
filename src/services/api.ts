@@ -1,15 +1,24 @@
-import axios from 'axios';
+import axios from "axios";
+import { parseCookies } from "nookies";
 
-const apiURL = 'https://books.ioasys.com.br/api/v1/'
+function getAPIClient(ctx?: any) {
+  const { "auth.token": token } = parseCookies(ctx);
 
-const api = axios.create({
-    baseURL: apiURL,
-});
+  const api = axios.create({
+    baseURL: "https://books.ioasys.com.br/api/v1/",
+  });
 
-api.interceptors.response.use(async response => {
-  if (response.status === 401) {
-    // redirecionar o usuário por que o token dele não é válido ou expirado
+  api.interceptors.request.use((config) => {
+    return config;
+  });
+
+  if (token) {
+    api.defaults.headers["Authorization"] = `Bearer ${token}`;
   }
-})
 
-export { api }
+  return api;
+}
+
+const api = getAPIClient();
+
+export { api };

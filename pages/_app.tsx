@@ -1,11 +1,12 @@
 import Head from "next/head";
-import { AppProps } from 'next/app'
+import { AppProps } from "next/app";
+import { GlobalStyle } from "styles/global";
 import "../styles/reset.css";
+import { AuthProvider } from "src/contexts/authContext";
 
 const App = ({ Component, pageProps }: AppProps) => {
-
   return (
-    <>
+    <AuthProvider>
       <Head>
         <title>Teste</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,8 +24,10 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="rating" content="general" />
       </Head>
 
+      <GlobalStyle />
+
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 };
 

@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCookie } from "src/utils/cookies";
 
 export function middleware(req: NextRequest) {
+
+  const token = req.cookies["auth.token"] || false;
   const url = req.nextUrl.clone();
 
-  if (req.cookies['token']) {
-    if (url.pathname) {
-      return NextResponse.rewrite(`${url.origin}/`)
-    }
-
-    return NextResponse.next()
-  } else {
-    return NextResponse.rewrite(`${url.origin}/login`)
+  if (!token) {
+   return NextResponse.rewrite("http://localhost:3030/login");
   }
+
+  return NextResponse.rewrite(url);
 }
