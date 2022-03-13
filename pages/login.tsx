@@ -20,9 +20,9 @@ export default function Login() {
 
   async function handleSignIn(data: SignInProps) {
     try {
-      await signIn(data);
-    }catch(e) {
-      console.log(e)
+      await signIn({ email: 'desafio@ioasys.com.br', password: '12341234' });
+    }catch(e: any) {
+      console.log(e.response.data)
     }
   }
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { parseCookies } from "nookies";
 
-function getAPIClient(ctx?: any) {
+export function getAPIClient(ctx?: any) {
   const { "auth.token": token } = parseCookies(ctx);
 
   const api = axios.create({
